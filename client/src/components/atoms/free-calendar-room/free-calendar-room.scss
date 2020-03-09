@@ -1,0 +1,12 @@
+.free-calendar-room {
+  display: inline-block;
+  background: #FFFFFF;
+
+  &:hover {
+    background: #1D54FE;
+  }
+
+  &:active {
+    background: #1D00FE;
+  }
+}

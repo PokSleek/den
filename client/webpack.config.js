@@ -1,5 +1,10 @@
 const path = require('path');
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
 module.exports = {
 	mode: "development",
 	devtool: "source-map",
@@ -25,22 +30,41 @@ module.exports = {
 					}
 				]
 			},
-			// All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
 			{
 				enforce: "pre",
 				test: /\.js$/,
 				loader: "source-map-loader"
-			}
+			},
+			{
+				test: /\.css?$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					"css-loader"
+				]
+			},{
+				test: /\.scss?$/,
+				use: [
+					'style-loader',
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: { sourceMap: true },
+					}, {
+						loader: 'sass-loader',
+						options: { sourceMap: true },
+					}
+				]
+			},
 		]
 	},
-
-	// When importing a module whose path matches one of the following, just
-	// assume a corresponding global variable exists and use that instead.
-	// This is important because it allows us to avoid bundling all of our
-	// dependencies, which allows browsers to cache those libraries between builds.
 	externals: {
 		"react": "React",
 		"react-dom": "ReactDOM"
+	},
+	optimization: {
+		minimizer: [
+			new UglifyJsPlugin()
+		]
 	},
 	devServer: {
 		publicPath: '/dist/',
@@ -48,5 +72,12 @@ module.exports = {
 		port: 9000,
 		open: true,
 		historyApiFallback: true,
-	}
+	},
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: 'style.css',
+		}),
+		//new BundleAnalyzerPlugin(),
+		new MomentLocalesPlugin(),
+	],
 };

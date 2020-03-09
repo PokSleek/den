@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Hello } from "./components/atoms/Hello";
+import { Main } from "./components/organisms/Main/main";
 
 ReactDOM.render(
-  <Hello compiler="TypeScript" framework="React" />,
+  <Main />,
   document.getElementById("root")
 );

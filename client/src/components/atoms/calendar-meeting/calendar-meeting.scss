@@ -1,0 +1,29 @@
+.calendar-meeting {
+
+  &__occupied {
+    display: inline-block;
+    background: #D5DFE9;
+
+    &:hover {
+      background: #98A9B9;
+    }
+
+    &:active {
+      background: #98A9B9;
+      background: rgba(0,0,0,0.12);
+    }
+  }
+
+  &__free {
+    display: inline-block;
+    background: #FFFFFF;
+
+    &:hover {
+      background: #1D54FE;
+    }
+
+    &:active {
+      background: #1D00FE;
+    }
+  }
+}

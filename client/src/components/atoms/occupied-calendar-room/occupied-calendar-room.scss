@@ -1,0 +1,13 @@
+.calendar-row-block {
+  display: inline-block;
+  background: #D5DFE9;
+
+  &:hover {
+    background: #98A9B9;
+  }
+
+  &:active {
+    background: #98A9B9;
+    background: rgba(0, 0, 0, 0.12);
+  }
+}
